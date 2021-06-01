@@ -1,0 +1,43 @@
+READ R0
+STORE R0 NFIM
+
+; se R0 < 3 escrever R0 - 1
+LOAD R1 TRES
+CMP R0 R1
+JNN MAIOR2
+LOAD R1 UM
+SUB R0 R1
+WRITE R0
+JUMP FIM
+
+; caso contrario fazer loop para achar fibonacci
+MAIOR2: LOAD R2 DOIS
+LOAD R3 UM
+
+; carregar N1 e N2 da memoria e calcular N3
+LOOP: LOAD R0 N1
+LOAD R1 N2
+ADD R0 R1
+
+; armazenar N2 na posicao N1 e N3 na posicao N2
+LOAD R1 N2
+STORE R1 N1
+STORE R0 N2
+
+; ver se chegou ao fim
+LOAD R1 NFIM
+ADD R2 R3
+CMP R1 R2
+JNZ LOOP
+
+; escrever resultado
+WRITE R0
+FIM: HALT
+
+N1: WORD 0
+N2: WORD 1
+NFIM: WORD 0
+UM: WORD 1
+DOIS: WORD 2
+TRES: WORD 3
+END
