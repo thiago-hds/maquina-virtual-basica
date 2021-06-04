@@ -63,7 +63,7 @@ O arquivo de entrada é definido em modo texto e deve conter as 3 linhas seguint
   - **Valor inicial da pilha**: inicialização do registrador AP;
   - **Entry Point do programa**: posição de memória onde a execução do programa deve começar – inicialização do registrador PC
 
-- **3ª linha: Instruções do programa**
+- **3ª linha a diante: Instruções do programa**
   Instrucões do programa em linguagem de máquina simbólica (definida em inteiros codificados em decimal).
   As instruções do programa devem ser separadas por espaço.
 
@@ -131,23 +131,49 @@ make
 ### Execução do Montador
 
 ```bash
-./assembler <caminho_arquivo>
+./assembler <caminho_arquivo_entrada> > <caminho_arquivo_saida>
 ```
 
-O arquivo passado deve estar em linguagem de montagem simbólica no [formato especificado](#montador).
+O arquivo de entrada passado deve estar em linguagem de montagem simbólica no [formato especificado](#montador).
 
 ### Execução do Emulador
 
 O emulador pode ser executado com o seguinte comando:
 
 ```bash
-./emulador [-v] <caminho_arquivo>
+./emulator [-v] <caminho_arquivo_entrada>
 ```
 
-A flag `-v` pode ser passada para ativar o modo verbose.
+A flag `-v` pode ser passada para ativar o modo verbose. Nesse modo o emulador imprime a cada instrução, a operação que está sendo executada, acrescido de um dump dos 7 registradores
 
 O arquivo passado deve estar em linguagem de máquina simbólica no [formato especificado](#formato-do-arquivo-de-entrada)
 
 ## Testes
 
-todo
+Estão disponíveis no diretório `testes` 4 programas básicos na linguagem de montagem especificada para testar o montador e as instruções do emulador.
+
+1. Fibonacci: Lê um número inteiro n da entrada padrão e imprime o n-ésimo número da sequência de fibonacci.
+1. Inverte: Lê 5 números inteiros da entrada padrão e os imprime em ordem contrária
+1. Mediana: Lê 5 números inteiros da entrada padrão e imprime a mediana deles.
+1. Operações: Lê dois números A e B da entrada padrão e imprime os resultados das seguintes operações:
+
+- A AND B
+- A OR B
+- NOT A
+- A XOR B
+- A + B
+- A - B
+- A x B
+- A : B
+- A mod B
+
+Execução:
+
+```bash
+# gera o arquivo executável
+./assembler testes/fibonacci > testes/fibonacci_exec
+
+# executa programa
+./emulator testes/fibonacci_exec
+
+```

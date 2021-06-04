@@ -1,3 +1,4 @@
 *.o
 emulator
 assembler
+testes/*_exec
